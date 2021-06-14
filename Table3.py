@@ -2,7 +2,7 @@ import psycopg2
 import sqlalchemy
 
 
-engine= sqlalchemy.create_engine('postgresql://postgres:q2w3e4r5@localhost:5432/Task3')
+engine= sqlalchemy.create_engine('postgresql://postgres:q2w3e4r5@localhost:5432/Task4')
 connection = engine.connect()
 connection.execute("""INSERT INTO collection (name, year)
                     VALUES('сборник № 1',2017),
@@ -16,23 +16,26 @@ connection.execute("""INSERT INTO collection (name, year)
                     ;""")
 connection.execute("""INSERT INTO singer_album (singer_id,album_id)
                     VALUES(1,1),
+                          (1,2),
                           (2,2),
                           (3,3),
+                          (3,6),
                           (4,4),
+                          (4,8),
                           (5,5),
                           (6,6),
                           (7,7),
                           (8,8)
                     ;""")
 connection.execute("""INSERT INTO singer_genre (singer_id,genre_id)
-                    VALUES(1,2),
-                          (2,2),
-                          (3,3),
-                          (4,4),
-                          (5,4),
-                          (6,5),
-                          (7,6),
-                          (8,6)
+                    VALUES(1,1),
+                          (2,1),
+                          (3,2),
+                          (4,3),
+                          (5,3),
+                          (6,4),
+                          (7,5),
+                          (8,5)
                     ;""")
 connection.execute("""INSERT INTO track_collection (track_id,collection_id)
                     VALUES(24,1),
@@ -56,5 +59,5 @@ connection.execute("""INSERT INTO track_collection (track_id,collection_id)
                           (19,8),
                           (12,8),
                           (5,8),
-                          (73,8)
+                          (24,8)
                     ;""")
