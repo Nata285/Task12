@@ -23,11 +23,8 @@ res_3 = connection.execute ("""SELECT album.name, AVG(duration) FROM track
                           ;""").fetchall()
 print(res_3)
 
-res_4 = connection.execute ("""SELECT singer.name, album.year FROM singer
-                          JOIN singer_album ON singer_album.singer_id = singer.id
-                          JOIN album ON singer_album.album_id = album.id
-                          GROUP BY singer.name, album.year 
-                          HAVING album.year != '2014'
+res_4 = connection.execute ("""SELECT  album FROM album
+                          WHERE album.year != '2014'
                           ;""").fetchall()
 print(res_4)
 
@@ -63,13 +60,12 @@ res_8 = connection.execute("""SELECT singer.name, MIN(track.duration) FROM singe
                           ;""").fetchall()
 print(res_8)
 
-res_9 = connection.execute("""SELECT album.name, COUNT(track.name)  FROM album 
-                          JOIN track ON track.album_id = album.id
-                          GROUP BY  album.name 
-                          HAVING (SELECT MIN (COUNT(track.name))
-                           FROM (SELECT album.name, COUNT(track.name)  FROM album 
-                          JOIN track ON track.album_id = album.id
-                          GROUP BY  album.name))
+res_9 = connection.execute("""SELECT album.name, COUNT(track.name)  FROM album
+                          JOIN track ON track.album_id=album.id
+                          GROUP BY album.name
+                          ORDER BY COUNT(track.name) ASC
                           
+                          LIMIT 3
                           ;""").fetchall()
 print(res_9)
+
